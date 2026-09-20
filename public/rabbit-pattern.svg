@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 520">
+  <defs>
+    <g id="usagi" fill="none" stroke="#77736e" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 28C14 14 15 1 21 1c7 0 7 17 7 25M39 27c0-8 0-26 7-26 6 0 7 15 2 29"/>
+      <path d="M17 28C5 34 2 45 5 56c4 15 17 22 31 21 15 0 27-8 30-22 3-14-6-26-20-29-10-2-20-2-29 2Z"/>
+      <circle cx="26" cy="49" r="1.8" fill="#77736e" stroke="none"/><circle cx="45" cy="49" r="1.8" fill="#77736e" stroke="none"/>
+      <path d="M32 57c3 4 7 4 10 0M35 60v4"/>
+    </g>
+    <g id="chiikawa" fill="none" stroke="#77736e" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 23C8 13 12 7 20 12M50 22c6-10 1-16-7-10"/>
+      <path d="M16 20C5 25 2 38 5 50c4 15 16 23 30 23 15 0 28-8 31-22 4-15-6-28-20-32-10-3-21-2-30 1Z"/>
+      <circle cx="25" cy="46" r="1.8" fill="#77736e" stroke="none"/><circle cx="46" cy="46" r="1.8" fill="#77736e" stroke="none"/>
+      <path d="M31 54c3 3 7 3 10 0M35 57v3"/>
+    </g>
+    <g id="hachiware" fill="none" stroke="#77736e" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 31 13 10l17 10 18-11 10 21"/>
+      <path d="M12 28C4 35 3 46 6 56c5 14 17 21 31 20 15 0 27-8 29-22 3-14-6-25-19-29-12-4-25-3-35 3Z"/>
+      <path d="M20 24c4 5 9 8 16 8 6 0 12-3 16-8"/>
+      <circle cx="26" cy="49" r="1.8" fill="#77736e" stroke="none"/><circle cx="47" cy="49" r="1.8" fill="#77736e" stroke="none"/>
+      <path d="M32 57c3 3 7 3 10 0M35 60v3"/>
+    </g>
+  </defs>
+
+  <g opacity=".84">
+    <use href="#usagi" transform="translate(26 30) rotate(-12) scale(.72)"/>
+    <use href="#chiikawa" transform="translate(172 18) rotate(8) scale(.88)"/>
+    <use href="#hachiware" transform="translate(332 42) rotate(-7) scale(.67)"/>
+    <use href="#usagi" transform="translate(490 22) rotate(13) scale(.82)"/>
+
+    <use href="#hachiware" transform="translate(78 162) rotate(14) scale(.86)"/>
+    <use href="#usagi" transform="translate(250 138) rotate(-18) scale(.62)"/>
+    <use href="#chiikawa" transform="translate(400 158) rotate(6) scale(.76)"/>
+    <use href="#hachiware" transform="translate(552 146) rotate(-16) scale(.58)"/>
+
+    <use href="#chiikawa" transform="translate(14 310) rotate(-8) scale(.68)"/>
+    <use href="#hachiware" transform="translate(148 286) rotate(11) scale(.72)"/>
+    <use href="#usagi" transform="translate(320 300) rotate(16) scale(.88)"/>
+    <use href="#chiikawa" transform="translate(496 286) rotate(-13) scale(.8)"/>
+
+    <use href="#usagi" transform="translate(96 438) rotate(9) scale(.58)"/>
+    <use href="#chiikawa" transform="translate(236 416) rotate(-15) scale(.76)"/>
+    <use href="#hachiware" transform="translate(404 428) rotate(8) scale(.84)"/>
+    <use href="#usagi" transform="translate(566 420) rotate(-8) scale(.54)"/>
+  </g>
+
+  <g fill="#77736e" opacity=".42">
+    <circle cx="145" cy="112" r="3"/><circle cx="470" cy="116" r="2.5"/>
+    <circle cx="54" cy="264" r="2.5"/><circle cx="302" cy="252" r="3"/>
+    <circle cx="566" cy="270" r="2.5"/><circle cx="184" cy="406" r="2.5"/>
+  </g>
+</svg>

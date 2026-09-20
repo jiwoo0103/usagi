@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.sites-runtime/
+.tools/
+sources/
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+*.log

@@ -1,0 +1,65 @@
+[
+  {
+    "character": "usagi",
+    "episode": 20,
+    "sound": "iyahaha",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep20_iyahaha_closeup_hold_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=3kSvvXrtd9w",
+    "source_start": 3.05,
+    "duration": 2.65,
+    "video_freeze_at": 2.44,
+    "note": "화면 전환 직전 우사기 얼굴 프레임을 고정하고 음성만 0.21초 연장"
+  },
+  {
+    "character": "usagi",
+    "episode": 35,
+    "sound": "iyattha",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep35_iyattha_32-36_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=5dTRQblIt-Q",
+    "source_start": 33.3343,
+    "duration": 2.676,
+    "note": "앞부분 인트로 화면 1.3343초 제거"
+  },
+  {
+    "character": "usagi",
+    "episode": 13,
+    "sound": "eating",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep13_eating_22-25_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=XvJ6-UQbbYE",
+    "source_start": 22.0,
+    "duration": 3.0
+  },
+  {
+    "character": "usagi",
+    "episode": 66,
+    "sound": "uyaiha",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep66_uyaiha_09-12_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=v_f2Uzk5z9s",
+    "source_start": 9.0,
+    "duration": 3.0
+  },
+  {
+    "character": "usagi",
+    "episode": 66,
+    "sound": "shouting",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep66_shouting_15.52-19_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=v_f2Uzk5z9s",
+    "source_start": 15.52,
+    "duration": 3.48
+  },
+  {
+    "character": "usagi",
+    "episode": 66,
+    "sound": "ulla",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep66_ulla_56-57_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=v_f2Uzk5z9s",
+    "source_start": 56.0,
+    "duration": 1.0
+  }
+]
