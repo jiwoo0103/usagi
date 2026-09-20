@@ -9,6 +9,16 @@ import {
 type ViewName = "main" | "dictionary";
 type BubbleState = "hidden" | "visible" | "leaving";
 
+type PreparedVoiceClip = {
+  clip: VoiceClip;
+  source: string;
+};
+
+const PRELOAD_QUEUE_SIZE = 5;
+const RECENT_HISTORY_SIZE = 10;
+const PRELOAD_CONCURRENCY = 2;
+const PRELOAD_CACHE_SIZE = 15;
+
 function getViewFromUrl(): ViewName {
   return new URLSearchParams(window.location.search).get("view") === "dictionary"
     ? "dictionary"
@@ -166,13 +176,123 @@ function MainView({ character, clips }: MainViewProps) {
   const [bubbleState, setBubbleState] = useState<BubbleState>("hidden");
   const [bubbleSlot, setBubbleSlot] = useState(0);
   const [pressToken, setPressToken] = useState(0);
-  const lastClipId = useRef<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const hideTimer = useRef<number | null>(null);
+  const preparedQueue = useRef<PreparedVoiceClip[]>([]);
+  const recentClipIds = useRef<string[]>([]);
+  const pendingClipIds = useRef(new Set<string>());
+  const activePreloads = useRef(0);
+  const currentClipId = useRef<string | null>(null);
+  const preloadCache = useRef(new Map<string, { source: string; lastUsed: number }>());
+  const fillQueue = useRef<() => void>(() => undefined);
 
   useEffect(() => () => {
     if (hideTimer.current) window.clearTimeout(hideTimer.current);
   }, []);
+
+  useEffect(() => {
+    let disposed = false;
+    const queueTarget = Math.min(PRELOAD_QUEUE_SIZE, clips.length);
+
+    preparedQueue.current = [];
+    recentClipIds.current = [];
+    pendingClipIds.current.clear();
+    activePreloads.current = 0;
+    currentClipId.current = null;
+
+    const trimCache = () => {
+      const protectedIds = new Set([
+        ...preparedQueue.current.map(({ clip }) => clip.id),
+        ...pendingClipIds.current,
+      ]);
+      if (currentClipId.current) protectedIds.add(currentClipId.current);
+
+      const removable = [...preloadCache.current.entries()]
+        .filter(([id]) => !protectedIds.has(id))
+        .sort(([, a], [, b]) => a.lastUsed - b.lastUsed);
+
+      while (preloadCache.current.size > PRELOAD_CACHE_SIZE && removable.length > 0) {
+        const [id, cached] = removable.shift()!;
+        URL.revokeObjectURL(cached.source);
+        preloadCache.current.delete(id);
+      }
+    };
+
+    const chooseNextClip = () => {
+      const reserved = new Set([
+        ...preparedQueue.current.map(({ clip }) => clip.id),
+        ...pendingClipIds.current,
+      ]);
+
+      let candidates = clips.filter(
+        (clip) => !reserved.has(clip.id) && !recentClipIds.current.includes(clip.id),
+      );
+
+      while (candidates.length === 0 && recentClipIds.current.length > 0) {
+        recentClipIds.current.shift();
+        candidates = clips.filter(
+          (clip) => !reserved.has(clip.id) && !recentClipIds.current.includes(clip.id),
+        );
+      }
+
+      return candidates[Math.floor(Math.random() * candidates.length)];
+    };
+
+    const scheduleFill = () => {
+      if (disposed || queueTarget === 0) return;
+
+      while (
+        activePreloads.current < PRELOAD_CONCURRENCY
+        && preparedQueue.current.length + pendingClipIds.current.size < queueTarget
+      ) {
+        const clip = chooseNextClip();
+        if (!clip) break;
+
+        const cached = preloadCache.current.get(clip.id);
+        if (cached) {
+          cached.lastUsed = Date.now();
+          preparedQueue.current.push({ clip, source: cached.source });
+          continue;
+        }
+
+        pendingClipIds.current.add(clip.id);
+        activePreloads.current += 1;
+
+        void fetch(clip.video)
+          .then((response) => {
+            if (!response.ok) throw new Error(`Failed to preload ${clip.video}`);
+            return response.blob();
+          })
+          .then((blob) => {
+            if (disposed) return;
+            const source = URL.createObjectURL(blob);
+            preloadCache.current.set(clip.id, { source, lastUsed: Date.now() });
+            preparedQueue.current.push({ clip, source });
+            trimCache();
+          })
+          .catch(() => {
+            if (!disposed) preparedQueue.current.push({ clip, source: clip.video });
+          })
+          .finally(() => {
+            pendingClipIds.current.delete(clip.id);
+            activePreloads.current = Math.max(0, activePreloads.current - 1);
+            scheduleFill();
+          });
+      }
+    };
+
+    fillQueue.current = scheduleFill;
+    scheduleFill();
+
+    return () => {
+      disposed = true;
+      fillQueue.current = () => undefined;
+      for (const { source } of preloadCache.current.values()) URL.revokeObjectURL(source);
+      preloadCache.current.clear();
+      preparedQueue.current = [];
+      pendingClipIds.current.clear();
+    };
+  }, [clips]);
 
   const finishPlayback = useCallback(() => {
     setBubbleState("leaving");
@@ -183,16 +303,36 @@ function MainView({ character, clips }: MainViewProps) {
     if (clips.length === 0) return;
     if (hideTimer.current) window.clearTimeout(hideTimer.current);
 
-    const candidates = clips.length > 1
-      ? clips.filter((clip) => clip.id !== lastClipId.current)
-      : clips;
-    const clip = candidates[Math.floor(Math.random() * candidates.length)];
-    lastClipId.current = clip.id;
+    let eligibleIndex = preparedQueue.current.findIndex(
+      ({ clip }) => !recentClipIds.current.includes(clip.id),
+    );
+
+    while (eligibleIndex < 0 && recentClipIds.current.length > 0) {
+      recentClipIds.current.shift();
+      eligibleIndex = preparedQueue.current.findIndex(
+        ({ clip }) => !recentClipIds.current.includes(clip.id),
+      );
+    }
+
+    const prepared = eligibleIndex >= 0
+      ? preparedQueue.current.splice(eligibleIndex, 1)[0]
+      : null;
+    const fallbackCandidates = clips.filter(
+      (clip) => !recentClipIds.current.includes(clip.id),
+    );
+    const fallbackClip = fallbackCandidates[Math.floor(Math.random() * fallbackCandidates.length)]
+      ?? clips[Math.floor(Math.random() * clips.length)];
+    const clip = prepared?.clip ?? fallbackClip;
+    const source = prepared?.source ?? clip.video;
+
+    currentClipId.current = clip.id;
+    recentClipIds.current.push(clip.id);
+    if (recentClipIds.current.length > RECENT_HISTORY_SIZE) recentClipIds.current.shift();
 
     const video = videoRef.current;
     if (video) {
       video.pause();
-      video.src = clip.video;
+      video.src = source;
       video.currentTime = 0;
       video.load();
       void video.play().catch(() => {
@@ -204,6 +344,7 @@ function MainView({ character, clips }: MainViewProps) {
     setBubbleSlot((previous) => (previous + 1 + Math.floor(Math.random() * 5)) % 6);
     setBubbleState("visible");
     setPressToken((value) => value + 1);
+    fillQueue.current();
   }, [clips]);
 
   return (
