@@ -144,10 +144,11 @@ type VideoBubbleProps = {
   state: BubbleState;
   slot: number;
   videoRef: React.RefObject<HTMLVideoElement | null>;
+  onPlaying: () => void;
   onEnded: () => void;
 };
 
-function VideoBubble({ clip, state, slot, videoRef, onEnded }: VideoBubbleProps) {
+function VideoBubble({ clip, state, slot, videoRef, onPlaying, onEnded }: VideoBubbleProps) {
   return (
     <aside
       className={`video-bubble bubble-slot-${slot} ${state}`}
@@ -160,6 +161,7 @@ function VideoBubble({ clip, state, slot, videoRef, onEnded }: VideoBubbleProps)
         preload="auto"
         controls={false}
         disablePictureInPicture
+        onPlaying={onPlaying}
         onEnded={onEnded}
       />
     </aside>
@@ -299,6 +301,10 @@ function MainView({ character, clips }: MainViewProps) {
     hideTimer.current = window.setTimeout(() => setBubbleState("hidden"), 320);
   }, []);
 
+  const showPlayingVideo = useCallback(() => {
+    setBubbleState("visible");
+  }, []);
+
   const playRandomClip = useCallback(() => {
     if (clips.length === 0) return;
     if (hideTimer.current) window.clearTimeout(hideTimer.current);
@@ -330,6 +336,7 @@ function MainView({ character, clips }: MainViewProps) {
     if (recentClipIds.current.length > RECENT_HISTORY_SIZE) recentClipIds.current.shift();
 
     const video = videoRef.current;
+    setBubbleState("hidden");
     if (video) {
       video.pause();
       video.src = source;
@@ -342,7 +349,6 @@ function MainView({ character, clips }: MainViewProps) {
 
     setCurrentClip(clip);
     setBubbleSlot((previous) => (previous + 1 + Math.floor(Math.random() * 5)) % 6);
-    setBubbleState("visible");
     setPressToken((value) => value + 1);
     fillQueue.current();
   }, [clips]);
@@ -372,6 +378,7 @@ function MainView({ character, clips }: MainViewProps) {
         state={bubbleState}
         slot={bubbleSlot}
         videoRef={videoRef}
+        onPlaying={showPlayingVideo}
         onEnded={finishPlayback}
       />
     </main>
