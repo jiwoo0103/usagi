@@ -1,6 +1,9 @@
 node_modules/
 dist/
 .sites-runtime/
+.wrangler/
+.dev.vars*
+!.dev.vars.example
 .tools/
 sources/
 *.tsbuildinfo
