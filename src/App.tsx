@@ -449,7 +449,7 @@ function DictionaryView({ character, clips, onBack }: DictionaryViewProps) {
         <div className="title-line">
           <div>
             <p className="eyebrow">{character.latinName} VOICE ARCHIVE</p>
-            <h1>{character.name} 보이스 아카이브 <span aria-hidden="true">♥</span></h1>
+            <h1>{character.name} 보이스 아카이브</h1>
           </div>
           <div className="filter-chips" aria-label="언어 필터">
             <button type="button" className="active">전체</button>

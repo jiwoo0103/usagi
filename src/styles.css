@@ -313,7 +313,7 @@ button:focus-visible {
 }
 
 .usagi-button:focus-visible {
-  border-radius: 48%;
+  outline: none;
 }
 
 .scene-float {
@@ -395,13 +395,6 @@ button:focus-visible {
 .bubble-slot-4 { top: 34%; right: 68%; }
 .bubble-slot-5 { top: 56%; right: 65%; }
 
-.dictionary-mode {
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at 50% 0%, rgb(255 249 192 / 74%), transparent 35%),
-    linear-gradient(145deg, #ffe77c, #ffdb51 55%, #ffe477);
-}
-
 .dictionary-view {
   position: relative;
   z-index: 1;
@@ -453,11 +446,6 @@ button:focus-visible {
   font-size: clamp(2rem, 4vw, 4rem);
   line-height: 1.04;
   letter-spacing: -0.055em;
-}
-
-.title-line h1 span {
-  color: #ff795d;
-  font-size: 0.68em;
 }
 
 .filter-chips {

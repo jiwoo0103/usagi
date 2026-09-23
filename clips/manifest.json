@@ -61,5 +61,83 @@
     "source_url": "https://www.youtube.com/watch?v=v_f2Uzk5z9s",
     "source_start": 56.0,
     "duration": 1.0
+  },
+  {
+    "character": "usagi",
+    "episode": 27,
+    "sound": "purururu",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep27_purururu_16.58-17.40_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=YiXvoKtKn2Q",
+    "source_start": 16.58,
+    "duration": 0.82,
+    "note": "파형상 푸루루루 첫 음 직전부터 시작하고 하치와레가 감탄하기 전에 종료한 발성 전용 클립"
+  },
+  {
+    "character": "usagi",
+    "episode": 148,
+    "sound": "pajama_usagi_song",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep148_pajama_usagi_song_38.40-46.80_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=brxYhi3P4DY",
+    "source_start": 38.4,
+    "duration": 8.4,
+    "note": "첫 우 발성 직전부터 시작하고 뒤쪽의 짧은 푸륏 발성까지 포함한 파자마 파티스 우사기 버전"
+  },
+  {
+    "character": "usagi",
+    "episode": 104,
+    "sound": "uung",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep104_uung_10.20-12.20_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=xovw6QTkl18",
+    "source_start": 10.2,
+    "duration": 2.0,
+    "note": "우사기 클로즈업 직전부터 우웅 발성 전체를 담고 음원 분리로 배경음을 제거한 최종본"
+  },
+  {
+    "character": "usagi",
+    "episode": 104,
+    "sound": "bread_ulla_x3",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep104_bread_ulla_x3_freeze-corrected_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=xovw6QTkl18",
+    "source_start": 13.52,
+    "duration": 3.36,
+    "video_freeze_at": 3.069733,
+    "note": "사용자 확정본: 기존 AAC 음성과 음량을 그대로 보존하고 전환 직전 92번 프레임을 마지막까지 유지"
+  },
+  {
+    "character": "usagi",
+    "episode": 104,
+    "sound": "eating",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep104_eating_bite-end_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=xovw6QTkl18",
+    "source_start": 21.55,
+    "duration": 1.234567,
+    "note": "사용자 확정본: 앞쪽 빵의 지직거리는 효과음을 제외하고 입을 벌려 먹는 장면부터 시작; 첨부한 빵을 물고 있는 자세인 36번 프레임까지 남기고 다음 씹는 동작 전에 영상과 소리를 함께 종료"
+  },
+  {
+    "character": "usagi",
+    "episode": 104,
+    "sound": "haa_x2",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep104_haa_x2_38.55-40.05_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=xovw6QTkl18",
+    "source_start": 38.55,
+    "duration": 1.5,
+    "note": "사용자 확정본: 앞쪽 모몽가 목소리 구간을 덜어내기 위해 기존 클립에서 0.45초 제거; 하아 두 번과 기존 종료 지점 유지"
+  },
+  {
+    "character": "usagi",
+    "episode": 104,
+    "sound": "ulla_yaha_yaha",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep104_ulla_yaha_yaha_53.66-56.85_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=xovw6QTkl18",
+    "source_start": 53.66,
+    "duration": 3.19,
+    "note": "사용자 확정본: 추가 앞부분 조정 요청에 따라 직전 수정본 앞 0.25초 추가 제거; 사용자가 승인한 뒷부분 유지"
   }
 ]
