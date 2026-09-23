@@ -392,6 +392,7 @@ type DictionaryViewProps = {
 };
 
 function DictionaryView({ character, clips, onBack }: DictionaryViewProps) {
+  const sortedClips = useMemo(() => [...clips].sort((a, b) => a.episode - b.episode), [clips]);
   const [expanded, setExpanded] = useState<{
     clip: VoiceClip;
     origin: { left: number; top: number; width: number };
@@ -460,7 +461,7 @@ function DictionaryView({ character, clips, onBack }: DictionaryViewProps) {
 
       <section className="dictionary-layout">
         <div className="clip-grid" aria-label={`${character.name} 목소리 목록`}>
-          {clips.map((clip) => (
+          {sortedClips.map((clip) => (
               <button
                 type="button"
                 key={clip.id}

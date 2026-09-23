@@ -56,6 +56,17 @@ export const voiceClips: VoiceClip[] = [
     language: "KR",
   },
   {
+    id: "kr-ep55-yahaha",
+    characterId: "usagi",
+    episode: 55,
+    title: "야하하",
+    romanized: "yahaha",
+    duration: 0.967267,
+    video: "/media/usagi/kr/ep55_yahaha_34.55-35.50_KR.mp4",
+    thumbnail: "/thumbnails/usagi/kr/ep55_yahaha.webp",
+    language: "KR",
+  },
+  {
     id: "kr-ep13-eating",
     characterId: "usagi",
     episode: 13,

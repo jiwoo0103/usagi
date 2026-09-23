@@ -139,5 +139,16 @@
     "source_start": 53.66,
     "duration": 3.19,
     "note": "사용자 확정본: 추가 앞부분 조정 요청에 따라 직전 수정본 앞 0.25초 추가 제거; 사용자가 승인한 뒷부분 유지"
+  },
+  {
+    "character": "usagi",
+    "episode": 55,
+    "sound": "yahaha",
+    "language": "KR",
+    "file": "clips/usagi/kr/ep55_yahaha_34.55-35.50_KR.mp4",
+    "source_url": "https://www.youtube.com/watch?v=7YWh1etvQoQ",
+    "source_start": 34.55,
+    "duration": 0.967267,
+    "note": "사용자 확정본: 앞쪽 하치와레 대사를 제거하고 우사기 야하하 발성부터 시작"
   }
 ]
